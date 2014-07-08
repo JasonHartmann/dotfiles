@@ -1,0 +1,2 @@
+cd /home/jhartmann
+nohup synergyc 10.116.2.52 &

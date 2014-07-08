@@ -1,0 +1,12 @@
+[user]
+	email = jason.hartmann@mckesson.com
+	name = Jason Hartmann
+[color]
+	branch = auto
+	status = auto
+[core]
+	editor = vi
+[url "http://"]
+	insteadOf = git://
+[push]
+	default = simple

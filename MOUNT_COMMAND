@@ -1,0 +1,1 @@
+sudo mount -t cifs //mercury.techrx.com/Collaborate/EnterpriseRx -o username=NAMCK\\e3l18ij /mnt/merc2
