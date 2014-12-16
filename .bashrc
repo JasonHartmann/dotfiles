@@ -99,6 +99,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -ltr'
 alias g='git'
+alias _='sudo'
+alias gs='git svn'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
