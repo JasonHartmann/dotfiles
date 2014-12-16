@@ -1,3 +1,4 @@
+cd ~
 mv .bash_aliases .bash_aliases.bak
 mv .bash_logout .bash_logout.bak
 mv .bashrc .bashrc.bak
