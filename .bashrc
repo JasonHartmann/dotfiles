@@ -101,6 +101,18 @@ alias l='ls -ltr'
 alias g='git'
 alias _='sudo'
 alias gs='git svn'
+alias gl='git l'
+alias gc='git commit -am'
+alias d='docker'
+alias drunit='docker run -it -v `pwd`:`pwd` -w `pwd`'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+alias drma='docker ps -a | grep "Exited.*\(minutes\|days|weeks|months|years\) ago" | awk '"'"'{print $1}'"'"' | xargs --no-run-if-empty docker rm'
+alias drmi='docker rmi'
+alias dim='docker images'
+alias drm='docker rm'
+
+export ANT_OPTS='-Dfile.encoding=iso-8859-1'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
