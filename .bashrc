@@ -59,7 +59,7 @@ function git-branch-name {
 }
 
 function git-branch-prompt {
-    local branch=`git-branch-name`
+    branch=`git-branch-name`
     if [ $branch ]; then
         printf "[%s]" $branch; 
     fi
