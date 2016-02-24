@@ -99,6 +99,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -ltr'
 alias g='git'
+alias ga='git add'
 alias _='sudo'
 alias gs='git status'
 alias gl='git l'
@@ -111,6 +112,10 @@ alias drma='docker ps -a | grep "Exited.*\(minutes\|days|weeks|months|years\) ag
 alias drmi='docker rmi'
 alias dim='docker images'
 alias drm='docker rm'
+alias dcup='docker-compose up -d'
+alias dcs='docker-compose stop'
+alias drm='docker rm'
+alias p='proxychains4'
 
 export ANT_OPTS='-Dfile.encoding=iso-8859-1'
 
