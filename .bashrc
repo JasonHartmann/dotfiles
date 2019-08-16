@@ -94,29 +94,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -ltr'
-alias g='git'
-alias ga='git add'
-alias _='sudo'
-alias gs='git status'
-alias gl='git l'
-alias gc='git commit -am'
-alias d='docker'
-alias drunit='docker run -it -v `pwd`:`pwd` -w `pwd`'
-alias dps='docker ps'
-alias dpsa='docker ps -a'
-alias drma='docker ps -a | grep "Exited.*\(minutes\|days|weeks|months|years\) ago" | awk '"'"'{print $1}'"'"' | xargs --no-run-if-empty docker rm'
-alias drmi='docker rmi'
-alias dim='docker images'
-alias drm='docker rm'
-alias dcup='docker-compose up -d'
-alias dcs='docker-compose stop'
-alias drm='docker rm'
-alias p='proxychains4'
-
 export ANT_OPTS='-Dfile.encoding=iso-8859-1'
 
 # Add an "alert" alias for long running commands.  Use like so:

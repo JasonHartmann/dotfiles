@@ -6,9 +6,9 @@ mv .gitconfig .gitconfig.bak
 mv guake.sh guake.sh.bak
 mv .profile .profile.bak
 
-ln -s scripts/.bash_aliases .bash_aliases
-ln -s scripts/.bash_logout  .bash_logout
-ln -s scripts/.bashrc  .bashrc
-ln -s scripts/.gitconfig  .gitconfig
-ln -s scripts/guake.sh  guake.sh
-ln -s scripts/.profile  .profile
+ln -s dotfiles/.bash_aliases .bash_aliases
+ln -s dotfiles/.bash_logout  .bash_logout
+ln -s dotfiles/.bashrc  .bashrc
+ln -s dotfiles/.gitconfig  .gitconfig
+ln -s dotfiles/guake.sh  guake.sh
+ln -s dotfiles/.profile  .profile
