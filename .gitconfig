@@ -6,6 +6,7 @@
 	status = auto
 [core]
 	editor = vi
+	excludesfile = /home/jhartmann/.gitignore_global
 [url "http://"]
 	insteadOf = git://
 [push]

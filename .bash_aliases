@@ -1,11 +1,12 @@
-alias 8='jenv shell 1.8'
-alias 11='jenv shell 11.0'
-alias 12='jenv shell 12.0'
+alias 8='export JAVA_HOME=/usr/lib/jvm/zulu-8-amd64'
+alias 11='export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64'
+alias 17='export JAVA_HOME=/usr/lib/jvm/jdk-17'
 alias jre='export JAVA_HOME=/data/erx/dev/client/jre; export PATH=/data/erx/dev/client/jre/bin:${SAVE_PATH}'
-alias auth='curl -s -u `jq -r ".clientId" < api-key.json`:`jq -r ".secret" < api-key.json` https://dev-shield.rxservices.mckesson.com/mps/auth/v1/oauth/token -d "grant_type=client_credentials"| echo "Bearer" `jq -r ".access_token"`'
+alias auth='curl -s -u `jq -r ".clientId" < api-key.json`:`jq -r ".secret" < api-key.json` https://qang-core.rxservices.mckesson.com/mps/auth/v1/oauth/token -d "grant_type=client_credentials"| echo "Bearer" `jq -r ".access_token"`'
 alias curljs='AUTH=`auth` curl -X POST -H "Content-Type: application/json" -H "Authorization: ${AUTH}" -d '
+alias erxauth='export AUTH=$(curl -vvv -H "Content-type: application/json" -d "{\"userId\":\"jhartmann1\",\"password\":\"pass\",\"realm\":\"persetest\",\"facilityId\":\"999\"}" http://localhost:8080/rest/login/client 2>&1 | grep -i "Set-cookie" | sed -En "s/[^\"]*\"//p" | sed -En "s/[\"].*//p") && echo export AUTH=$AUTH'
 alias publixauth='curl -s -u "46a6de15-925a-4d41-b173-ecdc07e5e975:Q7m0NY4FLH5XOmH4gre1ggkWVO2r40-JzxsHPHUZ" -d "grant_type=client_credentials" -d "resource=urn:publix:nha:covermymeds:tst" https://customersso-tst.pbxtst.com/adfs/oauth2/token'
-alias ls='ls -G'
+alias ls='ls --color -G'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -ltr'
@@ -16,17 +17,19 @@ alias gf='git fetch --all'
 alias gs='git status'
 alias gsv='git svn'
 alias gcp='git cherry-pick'
+alias gpr='~/scripts/git_fetch_pr.sh'
 alias gpu='git push upstream HEAD:master'
 alias gl='git l'
 alias gc='git commit -am'
-alias gr='gf && git rebase upstream/master'
+alias gr='gf && p git rebase upstream/master'
 alias yeet='git push'
 alias yank='git pull'
 alias geet='git push'
 alias gank='git pull'
 alias sync='yank upstream master && yeet'
 
-alias client='cd /data/erx && c && cd dev/client && jenv exec ./client.sh '
+alias binfmt='sudo sh -c "echo :WindowsBatch:E::bat::/init: > /proc/sys/fs/binfmt_misc/register"'
+alias client='tput reset && cd /data/erx && c && cd ~/prefix32/drive_c/McKesson/EnterpriseRx && WINEPREFIX=/home/jhartmann/prefix32 WINEARCH=win32 wine EnterpriseRX_D.bat && cd /data/erx'
 alias d='docker'
 alias dc='docker-compose'
 alias drunit='docker run -it -v `pwd`:`pwd` -w `pwd`'
@@ -43,17 +46,21 @@ alias dcs='docker-compose stop'
 alias dcl='docker-compose logs'
 alias dcrm='docker-compose rm'
 alias p='proxychains4'
-alias build='TOMCAT_HOME=/opt/tomcat5.5 g co -- DatabaseSchema/PostUpgrade && gs && jenv exec ant -Djboss.config.dir=/data'
+alias pt='/usr/lib/jvm/zulu-8-amd64/bin/java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5555 -cp /usr/local/benchmarking/lib/erx-benchmarking.jar -Djava.io.tmpdir=/tmp/loadCache/2020100 -XX:MaxMetaspaceSize=128m -Xmx512m -XX:+UseG1GC -DTRexHTTPCompression=true -DInterfaceAuthCert=persetest.cer -Djava.security.auth.login.config=/usr/local/benchmarking/properties/login.config -Dworker.1.username=USER[1] -Dworker.2.username=USER[1] -DTRexOne.StoreNumber=2020100 -Dscenario.datafile=/usr/local/benchmarking/testcases/DataSet.1.zip -Dproperty.dir=/usr/local/benchmarking/properties -Dpac.properties=/usr/local/benchmarking/properties/pt.pac.properties -DTRexOneURL=http://ptweb1.enterpriserx.ndchealth.com:15000/ndct04/TRexOneWeb -DTRexOneAuthURL=http://pterx.enterpriserx.ndchealth.com:8700/openam/json/authenticate?realm=1stamerica-admin -DEnableJWT=Y -Djava.awt.headless=true -DCSM_ENABLED=FALSE -Dreport.directory=/usr/local/benchmarking/logs -Dreport.filename=pac.2020100.rpt com.techrx.test.pac.Launcher'
+alias base='gs && d run -it -v /data/erx:/data/erx -v /data/gradle:/tmp/.gradle -v /etc/ssl/certs/java:/etc/ssl/certs/java --rm --user 1000:1000 -e _JAVA_OPTIONS=-Duser.home=/tmp -e GRADLE_USER_HOME=/tmp/.gradle --workdir=`pwd` erx-build'
+alias dgradle='base ./gradlew'
+alias build='base ant'
+alias dbuild='build'
 alias c='build compileSrc'
 alias c7='build init-java compileSrc'
 alias compile='c && rsync -ru bin/build/* /mnt/classes'
-alias full='build dev-clean-jaxb clean lib-check token compile custom package test &&  d run -it --rm -v `pwd`:/var/tmp:delegated erx-build ant pack database distribute installer'
+alias full='dbuild dev-clean-jaxb clean lib-check token compile custom package test pack database distribute'
 alias package='build compileSrc package'
-alias p=proxychains4
 alias runtest='build test'
 alias packtest='package test'
 alias qang='for FILENAME in cps*.war; do NEW=$(echo $FILENAME | cut -c4-); mv $FILENAME qa#cpsqang$NEW; done'
 alias qaga='for FILENAME in cps*.war; do NEW=$(echo $FILENAME | cut -c4-); mv $FILENAME qa#cpsqaga$NEW; done'
+alias managedb='cd /data/erx/bin/dist/database/bin && chmod u+x ManageDB.sh && ~/managedb.sh'
 alias mysql="docker run -it -v /home/jhartmann/fdb/TELJAVA443/Current/Data/Loading/MKF:/scripts --link mysql --rm mysql sh -c '${MYSQLCMD}'"
 alias sqlplus='rlwrap sqlplus'
 alias serve="python -m SimpleHTTPServer"
@@ -62,6 +69,11 @@ alias last='shuf -n 1 /data/namegen/src/macosMain/resources/dist.all.last.csv | 
 alias first='shuf -n 1 /data/namegen/src/macosMain/resources/dist.all.first.csv | cut -d, -f1'
 alias street='shuf -n 1 /data/namegen/src/macosMain/resources/street_names.csv | cut -d, -f1'
 alias uuid=uuidgen
+alias fixvpn='~jhartmann/fixvpn.sh'
+alias postvpn='sudo ~jhartmann/postvpn.sh'
+alias toad='WINEPREFIX='/home/jhartmann/prefix32' WINEARCH='win32' wine "C:\Program Files\Quest Software\Toad for Oracle 2020 Edition\Toad for Oracle 13.3\Toad.exe"'
+alias cfelig='cd /data/kafka-consumer && 11 && ./gradlew GenericHttpConsumer:bootRun -Dspring.profiles.active=cfeligibility'
+alias signalr='cd /data/kafka-consumer && 11 && ./gradlew GenericHttpConsumer:bootRun -Dspring.profiles.active=signalr'
 
 #  Customize BASH PS1 prompt to show current GIT repository and branch.
 #  by Mike Stewart - http://MediaDoneRight.com
@@ -155,7 +167,7 @@ Hostname="\h "
 # This PS1 snippet was adopted from code for MAC/BSD I saw from: http://allancraig.net/index.php?option=com_content&view=article&id=108:ps1-export-command-for-git&catid=45:general&Itemid=96
 # I tweaked it to work on UBUNTU 11.04 & 11.10 plus made it mo' better
 
-export PS1=$IBlack$Hostname$Time12h$Color_Off'$(git branch &>/dev/null;\
+export PS1=$IBlack$Hostname$Time12h$Color_Off'\[\]$(git branch &>/dev/null;\
 if [ $? -eq 0 ]; then \
   echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
   if [ "$?" -eq "0" ]; then \

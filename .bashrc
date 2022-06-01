@@ -121,4 +121,18 @@ export ORACLE_HOME=/home/jhartmann/oracle
 export PATH=$PATH:$ORACLE_HOME
 export LD_LIBRARY_PATH=$ORACLE_HOME
 export SQLPATH=$ORACLE_HOME
-export TNS_ADMIN="${ORACLE_HOME}"
+export TNS_ADMIN="${ORACLE_HOME}/network/admin"
+
+export LANG='en_US.UTF-8'
+export LANGUAGE='en_US:en'
+
+export GDK_SCALE=1
+export ERX_DB_VOLUME=erx-db-base
+
+export DISPLAY=:0.0
+export JAVA_HOME=/usr/lib/jvm/zulu-8-amd64
+export PATH=~/intellij/bin:$JAVA_HOME/bin:/usr/lib/oracle/xe/app/oracle/product/10.2.0/client/bin:"${PATH}"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

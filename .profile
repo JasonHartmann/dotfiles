@@ -15,7 +15,5 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-export JAVA_HOME=/usr/local/java/jdk1.8.0_40
-export PATH=$JAVA_HOME/bin:/usr/lib/oracle/xe/app/oracle/product/10.2.0/client/bin:"${PATH}"
-xhost +
+#xhost +
 #/usr/lib/oracle/xe/app/oracle/product/10.2.0/client/bin/oracle_env.sh
